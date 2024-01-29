@@ -1,0 +1,24 @@
+.container {
+ animation-name: light;
+ animation-duration: 6s;   
+ animation-iteration-count: infinite;
+ animation-timing-function: ease;
+}
+
+@keyframes light {
+    0%{
+        box-shadow: 0px 0px 10px 0px cyan , 0px 0px 10px 0px cyan inset;
+    }
+    25%{
+        box-shadow: 10px 10px 200px 0px cyan , 10px 10px 200px 0px cyan inset;
+    }
+    50%{
+        box-shadow: 20px 20px 300px 0px cyan , 20px 20px 300px 0px cyan inset;
+    }
+    75%{
+        box-shadow: 10px 10px 200px 0px cyan, 10px 10px 200px 0px cyan inset;
+    }
+    100%{
+        box-shadow: 0px 0px 10px 0px cyan , 0px 0px 10px 0px cyan inset;
+    }
+}
