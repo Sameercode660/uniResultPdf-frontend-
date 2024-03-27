@@ -1,15 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import axios from "axios";
 import "./animation.css"
+import {Link} from 'react-router-dom'
 
 function App() {
   const [number, setNumber] = useState("");
   const [motherName, setMotherName] = useState("");
+  const [course, setCourse] = useState('fybba(ca)sem-I')
+
   async function fetchData() {
     const data = {
       rollNumber: number,
       motherName,
+      course
     };
 
     const response = await axios.post(
@@ -54,7 +58,20 @@ function App() {
               setMotherName(e.target.value);
             }}
           />
+
+          <select name="semester" id="semester" className="bg-transparent text-white border border-cyan-500 p-2 rounded-md" onChange={((e)=> setCourse(e.target.value))}>
+            <option value="fybba(ca)sem-I" className="text-black">FY. BBA(CA) Sem-I</option>
+            <option value="fybba(ca)sem-II"  className="text-black">FY. BBA(CA) Sem-II</option>
+            <option value="sybba(ca)sem-I"  className="text-black">SY. BBA(CA) Sem-I</option>
+            <option value="sybba(ca)sem-II"  className="text-black">SY. BBA(CA) Sem-II</option>
+            <option value="tybba(ca)sem-I"  className="text-black">TY. BBA(CA) Sem-I</option>
+            <option value="tybba(ca)sem-II"  className="text-black">TY. BBA(CA) Sem-II</option>
+          </select>
           <button onClick={fetchData} className="bg-transparent text-white border border-cyan-500">Results</button>
+          
+          <Link to={'/admin'}>
+            <span>Login as admin</span>
+          </Link>
         </div>
       {/* </div> */}
     </>
