@@ -7,28 +7,37 @@ import {Link} from 'react-router-dom'
 function App() {
   const [number, setNumber] = useState("");
   const [motherName, setMotherName] = useState("");
-  const [course, setCourse] = useState('fybba(ca)sem-I')
+  const [course, setCourse] = useState(null)
 
   async function fetchData() {
-    const data = {
-      rollNumber: number,
-      motherName,
-      course
-    };
 
-    const response = await axios.post(
-      "http://localhost:8080/student/result",
-      data,
-      {
-        responseType: "blob",
+    try {
+      if(!number || !motherName || !course) {
+        alert('any one field is empty')
+        return;
       }
-    );
-
-    console.log(response.data);
-    const link = document.createElement("a");
-    link.href = window.URL.createObjectURL(new Blob([response.data]));
-    link.download = "Sample.pdf";
-    link.click();
+      const data = {
+        rollNumber: number,
+        motherName,
+        course
+      };
+  
+      const response = await axios.post(
+        "http://localhost:8080/student/result",
+        data,
+        {
+          responseType: "blob",
+        }
+      );
+  
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(new Blob([response.data]));
+      link.download = "Sample.pdf";
+      link.click();
+    } catch (error) {
+      console.log(error)
+      alert('Result is not found')
+    }
   }
 
   return (
@@ -60,6 +69,7 @@ function App() {
           />
 
           <select name="semester" id="semester" className="bg-transparent text-white border border-cyan-500 p-2 rounded-md" onChange={((e)=> setCourse(e.target.value))}>
+            <option value={null} className="text-black">Please Select year and semester</option>
             <option value="fybba(ca)sem-I" className="text-black">FY. BBA(CA) Sem-I</option>
             <option value="fybba(ca)sem-II"  className="text-black">FY. BBA(CA) Sem-II</option>
             <option value="sybba(ca)sem-I"  className="text-black">SY. BBA(CA) Sem-I</option>

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAdminContext from './context/AdminLogin'
 
 function Protected({children}) {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const {isAuthorised} = useAdminContext()
 
   useEffect(()=> {
-    if(false) {
+    if(!isAuthorised) {
         navigate('/')
     }
   }, [])

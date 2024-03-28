@@ -4,11 +4,14 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { routes } from "./router/Router.jsx";
+import { AdminLoginContextProvider } from "./context/AdminLogin.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AdminLoginContextProvider>
       <RouterProvider router={routes}>
         <App />
       </RouterProvider>
+    </AdminLoginContextProvider>
   </React.StrictMode>
 );
